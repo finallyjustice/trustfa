@@ -1,0 +1,115 @@
+% TEMPLATE for Usenix papers, specifically to meet requirements of
+%  USENIX '05
+% originally a template for producing IEEE-format articles using LaTeX.
+%   written by Matthew Ward, CS Department, Worcester Polytechnic Institute.
+% adapted by David Beazley for his excellent SWIG paper in Proceedings,
+%   Tcl 96
+% turned into a smartass generic template by De Clarke, with thanks to
+%   both the above pioneers
+% use at your own risk.  Complaints to /dev/null.
+% make it two column with no page numbering, default is 10 point
+
+% Munged by Fred Douglis <douglis@research.att.com> 10/97 to separate
+% the .sty file from the LaTeX source template, so that people can
+% more easily include the .sty file into an existing document.  Also
+% changed to more closely follow the style guidelines as represented
+% by the Word sample file. 
+
+% Note that since 2010, USENIX does not require endnotes. If you want
+% foot of page notes, don't include the endnotes package in the 
+% usepackage command, below.
+
+% This version uses the latex2e styles, not the very ancient 2.09 stuff.
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix,epsfig}
+\usepackage{color}
+
+\usepackage{graphicx, subfigure}
+\usepackage{url}
+
+\def\todo#1{{\bf \textcolor{red}{TODO:~#1}}}
+\def\question#1{{\bf \textcolor{purple}{Question:~#1}}}
+\def\comment#1{{\bf \textcolor{blue}{~#1}}}
+\def\etal{et\ al.\ }
+
+\begin{document}
+
+%don't want date printed
+\date{}
+
+%make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\title{\Large \bf TrustFA: TrustZone-Assisted Facial Authentication on Smartphone}
+
+%for single author (just remove % characters)
+\author{
+{\rm Dongli Zhang}\\
+Stony Brook University
+\and
+{\rm Radu Sion}\\
+Stony Brook University
+% copy the following lines to add more authors
+% \and
+% {\rm Name}\\
+%Name Institution
+} % end author
+
+\maketitle
+
+% Use the following at camera-ready time to suppress page numbers.
+% Comment it out when you first submit the paper for review.
+\thispagestyle{empty}
+
+
+\subsection*{Abstract}
+
+Nowadays, many applications, such as Facebook, Dropbox and mobile banking,
+allow users to login and use the remote services via smartphones. Because of
+the limitations of credential-based authentication, biometric authentication is
+becoming popular. Facial authentication is one of the popular biometric
+authentication techniques and it consists of three phases: first, the photo is
+captured by hardware camera; second, the smartphone application retrieves the
+photo from hardware camera via OS; third, the smartphone application
+authenticates the user by sending the photo (or its extracted features) to
+remote services.  To achieve the trusted facial authentication, all three
+phases should be secured.  In this paper, we propose TrustFA, a
+TrustZone-assisted solution to secure all three phases in facial authentication
+on smartphone.  We leverage the ARM TrustZone technique to capture the photo
+and collect the accelerometer data in TrustZone secure world.  As all of the
+secure world memory, peripherals and interrupts are isolated from normal world
+legacy OS, attackers even with root privilege in legacy OS would not be able to
+break the authentication. Within our knowledge, this is the first effort that
+all of three phases in facial authentication are secured. Compared to prior
+works, the threat model regarding smartphone facial authentication assumed in
+this paper is the most strongest.  Since the prototyping is still in progress,
+we envision the implementation of TrustFA on Freescale i.MX53 Quick Start Board
+(QSB).
+
+
+%However, 2D facial authentication still has two issues. First, 2D media attack
+%makes the 2D facial authentication untrusted. The attacker could just put a
+%photo in front of the camera to cheat the authentication program.  Second, the
+%large TCB of legacy OS makes the smartphone vulnerable to malwares.  The
+%untrusted legacy OS would tamper the photo/video captured by the camera (e.g.,
+%virtual camera attack). 
+
+\input{introduction}
+\input{design}
+\input{implementation}
+\input{discussion}
+\input{related}
+\input{conclusion}
+
+{\footnotesize \bibliographystyle{acm}
+\bibliography{refs}}
+
+
+%\theendnotes
+
+\end{document}
+
+
+
+
+
+
+

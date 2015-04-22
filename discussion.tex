@@ -1,0 +1,20 @@
+\section{Discussion}
+\label{sec:discussion}
+
+As the world switch is primarily triggered by SMC instruction, the
+super-privileged attacker in legacy OS can just block the call of SMC
+instruction to mount the deny-of-service attack to prevent the user from
+switching to TrustFA Agent in secure world. A solution would be to add a special
+button on the smartphone and set the corresponding interrupt as secure. Once the
+button is pressed, secure kernel will be triggered immediately.
+
+The attacker can also mount the man-in-the-middle (MIM) attack by executing a
+counterfeit of TrustFA Agent in normal world. Instead of the real TrustFA
+Agent, the user will interact with the counterfeit. As the counterfeit is not
+able to retrieve $K_{private}$ in secure world, the photos not encrypted with
+the private key cannot pass the verification of the remote server.
+
+As mentioned in section \ref{sec:implementation}, many peripheral drivers are
+going to be ported to the secure kernel, which will increase the TCB size.
+TrustFA is orthogonal to TrustUI \cite{TrustUI} minimizing the TCB in secure
+world by placing only the driver's wrapper in secure world.

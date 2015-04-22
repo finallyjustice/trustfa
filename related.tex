@@ -1,0 +1,56 @@
+\section{Related Work}
+\label{sec:related}
+
+\noindent
+{\bf Biometric Authentication~} 
+Many biometric authentication techniques are involved in our life.
+Fingerprint-based authentication is introduced with Apple's iPhone
+\cite{iphone}. Karthikeyan \etal \cite{cmu-finger} compare the usability of
+Apple’s iPhone 5S Touch ID fingerprint-based authentication with PIN-based
+authentication and concludes that the former is better than the latter from
+usability standpoint. In addition, face unlock is also implemented on Android
+\cite{face-unlock}.  A fundamental limitation of biometric authentication is
+that it is not very difficult for attacker to covertly obtain a person's photo
+and video from social networks, or fingerprint pattern from an object or surface
+touched by a person.  Researchers have developed numerous facial liveness
+detection techniques \cite{Jain-MSU}, e.g., to capture spontaneous eye blinks or
+lip movements \cite{Pan-ICCV}.  While it is useful for photo attacks, it cannot
+deal with recorded videos.  3D face recognition has been widely studied in the
+recent years \cite{Wang-PAMI, Amberg-FG, Chaua-3D}.  The 3D capturing process is
+much more time consuming than 2D methods or entering a password.  Chen \etal
+\cite{Chen-Sensor} make the first effort to employ motion sensors of smartphones
+to improve the performance and security of facial authentication.  Our work also
+utilize smartphone accelerometer to correlate 2D photo with 3D facial model and
+leverage the Nose Angle Detection algorithm in \cite{Chen-Sensor}.  Regarding
+Phase 2, our work assume a stronger threat model than \cite{Chen-Sensor}. While
+\cite{Chen-Sensor} assumes the legacy OS is trusted, we assume it is potentially
+malicious. In addition, the computation overhead of virtual camera attack
+detection of \cite{Chen-Sensor} in Phase 2 is relatively high. By leveraging TrustZone, the overhead
+of machine learning related computing can be eliminated and user only needs to
+pay for the overhead of TrustZone world switch, which is in the magnitude of microsecond. 
+
+
+\noindent
+{\bf ARM TrustZone~}
+TrustZone is the security extension of ARM. One of its application is to
+protect the integrity of the OS kernel. TrustDump \cite{TrustDump} is a
+TrustZone-based memory acquisition mechanism to reliably obtain the RAM memory
+and CPU registers of the mobile OS kernel even if the OS has crashed or has
+been compromised.  TZ-RKP \cite{TZ-RKP} and SPROBES \cite{SPROBES} propose
+real-time OS protection mechanisms where the kernel is instrumented and all
+critical kernel modifications will be trapped to TrustZone secure world.
+Besides, TrustZone has been used to protect sensitive data.  DroidVault
+\cite{DroidVault} establishes a secure channel between data owners and data
+users while allowing data owners to enforce strong control over the sensitive
+data with a minimal TCB in TrustZone secure world. TrustUI \cite{TrustUI}
+proposes a new trusted path design for mobile devices that enables secure
+interaction between end users and services based on ARM's TrustZone technology,
+which is orthogonal to our work.  TLR \cite{TLR} enables the separation of
+application security-sensitive logic from the rest of the application, and
+isolates it from the OS and other apps. VeriUI \cite{VeriUI} introduces a TrustZone-assisted
+credential-based authentication.  Unlike \cite{TrustUI}, our TrustFA is a
+TrustZone-assisted facial authentication and we leverage the accelerometer to
+different 2D counterfeit from 3D face.  Considering the urge requirement of
+trusted reading from sensors such as GPS, camera, or microphones, Liu \etal
+\cite{TrustSensor} implement a software abstraction for trusted sensors. In
+our prototype, we will just implement our own software interfaces.
